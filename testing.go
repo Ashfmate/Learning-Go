@@ -4,25 +4,31 @@ import (
 	"fmt"
 )
 
-struct dude {
-  int num
-  string msg
+type dude struct {
+	num int
+	msg string
+}
+
+func getMsg(num int) (string, bool) {
+	found := false
+	choices := []dude{{3, "Fizz"}, {5, "Buzz"}, {7, "bazz"}}
+	buffer := ""
+	for _, val := range choices {
+		if num%val.num == 0 {
+			found = true
+			buffer = fmt.Sprint(buffer, val.msg)
+		}
+	}
+	return buffer, found
 }
 
 func main() {
-  choices := []dude{dude(3,"Fizz"), dude(5,"Buzz")}
-	for num := range 101 {
-    found := false
-	  for _, val := range choices {
-      if num % val.num == 0 {
-        found = true
-        fmt.Print(val.msg)
-      }
-    }
-    if found {
-      fmt.Println()
-    } else {
-      fmt.Println(num)
-    }
-  }
+	for num := 1; num <= 105; num++ {
+		ans, found := getMsg(num)
+		if found {
+			fmt.Println(ans)
+		} else {
+			fmt.Println(num)
+		}
+	}
 }
