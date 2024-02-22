@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type dude struct {
@@ -9,23 +10,20 @@ type dude struct {
 	msg string
 }
 
-func getMsg(num int) (string, bool) {
-	found := false
-	choices := []dude{{3, "Fizz"}, {5, "Buzz"}, {7, "bazz"}}
-	buffer := ""
+func getMsg(num int, choices ...dude) string {
+	res := []string{}
 	for _, val := range choices {
 		if num%val.num == 0 {
-			found = true
-			buffer = fmt.Sprint(buffer, val.msg)
+			res = append(res, val.msg)
 		}
 	}
-	return buffer, found
+	return strings.Join(res, "")
 }
 
 func main() {
 	for num := 1; num <= 105; num++ {
-		ans, found := getMsg(num)
-		if found {
+		ans := getMsg(num, dude{3, "Fizz"}, dude{5, "Buzz"}, dude{7, "Bazz"})
+		if len(ans) > 0 {
 			fmt.Println(ans)
 		} else {
 			fmt.Println(num)
