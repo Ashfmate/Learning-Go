@@ -20,7 +20,7 @@ func getMsg(num int, choices ...dude) string {
 	return strings.Join(res, "")
 }
 
-func main() {
+func fizzbuzz() {
 	for num := 1; num <= 105; num++ {
 		ans := getMsg(num, dude{3, "Fizz"}, dude{5, "Buzz"}, dude{7, "Bazz"})
 		if len(ans) > 0 {
